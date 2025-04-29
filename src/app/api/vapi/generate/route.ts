@@ -9,7 +9,7 @@ import { dbConnect } from "@/lib/dbConnect";
 import { User } from "@/lib/model/user.Schema";
 import { Interview } from "@/lib/model/interview.Schema";
 export async function POST(req: NextRequest) {
-  const { type, role, level, techstack, amount, companyName } =
+  const { type, role, level, techstack, amount} =
     await req.json();
   const { id }: any = MyCookiesComponent();
 
@@ -46,7 +46,6 @@ export async function POST(req: NextRequest) {
       questions: JSON.parse(questions),
       userId: id,
       finalized: true,
-      companyName,
     };
     console.log("1", interview);
 
