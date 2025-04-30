@@ -39,7 +39,6 @@ export async function POST(req: NextRequest) {
     `,
     });
     console.log("2", questions);
- return NextResponse.json(success(200, {questions}));
     const interview = {
       role,
       type,
@@ -50,6 +49,7 @@ export async function POST(req: NextRequest) {
       finalized: true,
     };
     console.log("1", interview);
+ return NextResponse.json(success(200, interview));
 
     dbConnect();
     console.log("thi ai tiwe", interview);
