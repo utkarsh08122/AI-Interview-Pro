@@ -31,7 +31,7 @@ export const getIntervewById = async (id: any) => {
 };
 
 export const getUserData = async () => {
-  const { id }: any = MyCookiesComponent();
+  const { id }: any =await MyCookiesComponent();
   const user = await User.findById({ _id: id });
   return user;
 };
