@@ -9,13 +9,12 @@ import { dbConnect } from "@/lib/dbConnect";
 import { User } from "@/lib/model/user.Schema";
 import { Interview } from "@/lib/model/interview.Schema";
 export async function POST(req: NextRequest) {
-  const { type, role, level, techstack, amount,userid} =
-    await req.json();
- 
-
+  const { type, role, level, techstack, amount,userid} =await req.json();
+  
   try {
+    
      
-
+   return NextResponse.json(success(200,{type, role, level, techstack, amount,userid}));
     const genAi = new GoogleGenAI({
       apiKey: "AIzaSyAykniy8AomulgCuF2VRk_gFJaZdIN5iw0",
     });
@@ -54,7 +53,7 @@ export async function POST(req: NextRequest) {
     console.log("thi ai tiwe", interview);
     await Interview.create(interview);
 
-    return NextResponse.json(success(200, `successful ${id}`));
+    return NextResponse.json(success(200, "successful"));
   } catch (e) {
     return NextResponse.json(error(500, e));
   }
