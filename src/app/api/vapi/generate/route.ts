@@ -14,6 +14,7 @@ export async function POST(req: NextRequest) {
  
 
   try {
+    return NextResponse.json(success(200,{type,role,level,techstack,amount}));
      const { id }: any =await MyCookiesComponent();
     console.log("in side the genaration on question in vapi ");
 
