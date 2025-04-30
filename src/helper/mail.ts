@@ -100,7 +100,7 @@ export const sendEmail = async ({ email, userId }: any) => {
           please verify your email address by clicking the button below:
         </p>
         <a
-          href="http://localhost:3000/varifytoken?token=${hashedPassword}"
+          href="${process.env.NEXT_PUBLIC_BASE_URL}/varifytoken?token=${hashedPassword}"
           style="
             display: inline-block;
             padding: 10px 20px;
