@@ -3,7 +3,7 @@ import { MyCookiesComponent } from "@/helper/Token";
 import { cookies } from "next/headers";
 
 const Page = async () => {
-  const { name, id }: any = MyCookiesComponent();
+  const { name, id }: any = await MyCookiesComponent();
 
   return (
     <>
