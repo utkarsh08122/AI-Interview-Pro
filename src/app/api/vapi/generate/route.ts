@@ -14,7 +14,7 @@ export async function POST(req: NextRequest) {
  
 
   try {
-     const id:any ="6810a83fd36e9572bd6f5453";
+     const id:any =await MyCookiesComponent();
     console.log("in side the genaration on question in vapi ");
 
     const genAi = new GoogleGenAI({
