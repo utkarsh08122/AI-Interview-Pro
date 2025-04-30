@@ -20,6 +20,7 @@ const InterviewCard = async ({
     userId && interviewId
       ? await getFeedbackByInterviewId({ interviewId, userId })
       : null;
+  console.log("this is the user id an interver id",feedback)
   const formattedDate = dayjs(
     feedback?.createdAt || createdAt || Date.now()
   ).format("MMM D,YYYY");
