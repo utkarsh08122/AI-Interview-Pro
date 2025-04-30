@@ -18,7 +18,7 @@ export async function POST(req: NextRequest) {
     console.log("in side the genaration on question in vapi ");
 
     const genAi = new GoogleGenAI({
-      apiKey: "AIzaSyAif7vJNgUz_MTN9a3WQS7MaH4v0dlMd_A",
+      apiKey: "AIzaSyAykniy8AomulgCuF2VRk_gFJaZdIN5iw0",
     });
      return NextResponse.json(success(200, "asas sdvsdvSVDS");
     console.log("1");
