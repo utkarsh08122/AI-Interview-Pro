@@ -13,8 +13,6 @@ export async function POST(req: NextRequest) {
   
   try {
     
-     
-   return NextResponse.json(success(200,{type, role, level, techstack, amount,userid}));
     const genAi = new GoogleGenAI({
       apiKey: "AIzaSyAykniy8AomulgCuF2VRk_gFJaZdIN5iw0",
     });
