@@ -14,7 +14,7 @@ export async function POST(req: NextRequest) {
   try {
     
     const genAi = new GoogleGenAI({
-      apiKey: "AIzaSyAykniy8AomulgCuF2VRk_gFJaZdIN5iw0",
+      apiKey:process.env.GOOGLE_GENERATIVE_AI_API_KEY,
     });
 
     console.log("1");
