@@ -9,13 +9,12 @@ import { dbConnect } from "@/lib/dbConnect";
 import { User } from "@/lib/model/user.Schema";
 import { Interview } from "@/lib/model/interview.Schema";
 export async function POST(req: NextRequest) {
-  const { type, role, level, techstack, amount} =
+  const { type, role, level, techstack, amount,userid} =
     await req.json();
  
 
   try {
-     const {id}:any =await MyCookiesComponent();
-    console.log("in side the genaration on question in vapi ");
+     
 
     const genAi = new GoogleGenAI({
       apiKey: "AIzaSyAykniy8AomulgCuF2VRk_gFJaZdIN5iw0",
@@ -45,7 +44,7 @@ export async function POST(req: NextRequest) {
       level,
       techstack: techstack.split(","),
       questions: JSON.parse(questions),
-      userId: id,
+      userId: userid,
       finalized: true,
     };
     console.log("1", interview);
