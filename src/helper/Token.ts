@@ -9,9 +9,9 @@ export const generetRefressToken = (data: object) => {
 
   return RefressToken;
 };
-export function MyCookiesComponent() {
-  const cookieStore: any = cookies();
-  const cooki = cookieStore.get("RefresToken").value || "";
+export async function MyCookiesComponent() {
+  const cookieStore: any =await cookies();
+  const cooki =await cookieStore.get("RefresToken").value || "";
   const decoded = jwtDecode(cooki);
   return decoded;
 }
