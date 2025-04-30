@@ -11,9 +11,10 @@ import { Interview } from "@/lib/model/interview.Schema";
 export async function POST(req: NextRequest) {
   const { type, role, level, techstack, amount} =
     await req.json();
-  const { id }: any = MyCookiesComponent();
+ 
 
   try {
+     const { id }: any =await MyCookiesComponent();
     console.log("in side the genaration on question in vapi ");
 
     const genAi = new GoogleGenAI({
