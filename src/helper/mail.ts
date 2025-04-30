@@ -29,7 +29,7 @@ export const sendEmail = async ({ email, userId }: any) => {
       to: "bar@example.com, baz@example.com", // list of receivers
       subject: "Hello ✔", // Subject line
       text: "Hello world?", // plain text body
-      html: `<b>http://localhost:3000/varifytoken?token=${hashedPassword}</b>
+      html: `<b>${process.env.NEXT_PUBLIC_BASE_URL}/varifytoken?token=${hashedPassword}</b>
       
       <!DOCTYPE html>
 <html lang="en">
