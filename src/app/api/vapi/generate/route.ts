@@ -38,7 +38,7 @@ export async function POST(req: NextRequest) {
     `,
     });
     console.log("2", questions);
-
+ return NextResponse.json(success(200, {questions}));
     const interview = {
       role,
       type,
