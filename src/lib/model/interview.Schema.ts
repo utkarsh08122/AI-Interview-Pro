@@ -31,10 +31,6 @@ const interviewSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
-    companyName: {
-      type: String,
-      required: true,
-    },
   },
   { timestamps: true }
 );
