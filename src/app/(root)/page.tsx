@@ -10,7 +10,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 const page = async () => {
-  const { id }: any = MyCookiesComponent();
+  const { id }: any =await MyCookiesComponent();
 
   const [interview, letestInterview] = await Promise.all([
     await getInterviewData(id),
