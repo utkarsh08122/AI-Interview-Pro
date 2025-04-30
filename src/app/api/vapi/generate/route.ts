@@ -14,7 +14,7 @@ export async function POST(req: NextRequest) {
  
 
   try {
-     const id:any =await MyCookiesComponent();
+     const {id}:any =await MyCookiesComponent();
     console.log("in side the genaration on question in vapi ");
 
     const genAi = new GoogleGenAI({
@@ -49,13 +49,13 @@ export async function POST(req: NextRequest) {
       finalized: true,
     };
     console.log("1", interview);
- return NextResponse.json(success(200, interview));
+ 
 
     dbConnect();
     console.log("thi ai tiwe", interview);
     await Interview.create(interview);
 
-    return NextResponse.json(success(200, "successful"));
+    return NextResponse.json(success(200, `successful ${id}`));
   } catch (e) {
     return NextResponse.json(error(500, e));
   }
