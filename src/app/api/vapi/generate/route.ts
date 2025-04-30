@@ -20,7 +20,7 @@ export async function POST(req: NextRequest) {
     const genAi = new GoogleGenAI({
       apiKey: "AIzaSyAykniy8AomulgCuF2VRk_gFJaZdIN5iw0",
     });
-     return NextResponse.json(success(200, "asas sdvsdvSVDS");
+
     console.log("1");
     const { text: questions }: any = await genAi.models.generateContent({
       model: "gemini-2.0-flash",
