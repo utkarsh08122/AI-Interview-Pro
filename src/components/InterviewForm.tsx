@@ -62,12 +62,12 @@ const InterviewForm = ({ userId }: any) => {
             onSubmit={form.handleSubmit(onSubmit)}
             className="w-full space-y-5 mt-4 form "
           >
-            <FormField
+         <FormField
               name="role"
               label="role"
               type="text"
               control={form.control}
-              placeholder="Your role"
+              placeholder="what role would you like to train for?"
             />
 
             <FormField
@@ -75,7 +75,7 @@ const InterviewForm = ({ userId }: any) => {
               label="level"
               type="text"
               control={form.control}
-              placeholder="Your level"
+              placeholder="the job experience level"
             />
 
             <FormField
@@ -83,14 +83,14 @@ const InterviewForm = ({ userId }: any) => {
               label="amount"
               type="text"
               control={form.control}
-              placeholder="Your amount"
+              placeholder="How many questions would you link me to prepare for you?"
             />
             <FormField
               name="techstack"
               label="techstack"
               type="text"
               control={form.control}
-              placeholder="Your techstack"
+              placeholder="a list of technologies to cover during the job interview."
             />
 
             <FormField
@@ -98,9 +98,8 @@ const InterviewForm = ({ userId }: any) => {
               label="type"
               type="text"
               control={form.control}
-              placeholder="Your type"
+              placeholder="Are you aiming for a technical or non-technical"
             />
-
             <Button type="submit" className="btn">
             generate Interview 
             </Button>
