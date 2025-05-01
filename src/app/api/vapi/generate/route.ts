@@ -15,13 +15,16 @@ export async function POST(req: NextRequest) {
   const { type, role, level, techstack, amount,userid} =await req.json();
   
   try {
- 
+  const RefresToken =await request.cookies.get("RefresToken", {
+      httpOnly: true,
+      secure: true,
+    })?.value || "";
     
+    const{id,name}:any=jwtDecode(RefresToken);
     const genAi = new GoogleGenAI({
       apiKey:process.env.GOOGLE_GENERATIVE_AI_API_KEY,
     });
 
-    console.log("1");
     const { text: questions }: any = await genAi.models.generateContent({
       model: "gemini-2.0-flash",
       contents: `Prepare questions for a job interview.
@@ -45,7 +48,7 @@ export async function POST(req: NextRequest) {
       level,
       techstack: techstack.split(","),
       questions: JSON.parse(questions),
-      userId: userid,
+      userId:id,
       finalized: true,
     };
     console.log("1", interview);
