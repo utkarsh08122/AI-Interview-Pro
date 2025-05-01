@@ -33,6 +33,7 @@ const Agent = ({
   const [messages, setMessages] = useState<SavedMessage[]>([]);
   const [isSpeaking, setIsSpeaking] = useState(false);
   const [lastMessage, setLastMessage] = useState<string>("");
+  const [lestestMassage, setLestestMassage] = useState<any>();
 
   useEffect(() => {
     const onCallStart = () => {
@@ -44,8 +45,10 @@ const Agent = ({
     };
 
     const onMessage = (message: Message) => {
-      console.log("this si the massage in compo/agent",message)
-        console.log(messages)
+      setLestestMassage(message);
+      if (lestestMassage.type == "conversation-update") {
+        console.log(lestestMassage.conversation)
+      }
       if (message.type === "transcript" && message.transcriptType === "final") {
         const newMessage = { role: message.role, content: message.transcript };
         setMessages((prev) => [...prev, newMessage]);
