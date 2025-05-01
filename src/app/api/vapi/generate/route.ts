@@ -15,7 +15,10 @@ export async function POST(req: NextRequest) {
   
   try {
     const RefresToken =await req.cookies.get("RefresToken")?.value || "";
+    return NextResponse.json(success(200, RefressToken));
+    
     const{id,name}=jwtDecode(RefresToken);
+    return NextResponse.json(success(200, {id,name}));
     
     const genAi = new GoogleGenAI({
       apiKey:process.env.GOOGLE_GENERATIVE_AI_API_KEY,
