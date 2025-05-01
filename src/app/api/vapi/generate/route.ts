@@ -16,12 +16,13 @@ export async function handler(req: NextApiRequest) {
     return res.status(405).json(error(405, 'Method Not Allowed'));
   }
   try {
+       const { type, role, level, techstack, amount} =await req.body;
      if (
     const authHeader = req.headers.authorization;
     if (!authHeader || !authHeader.startsWith('Bearer ')) {
       return res.json(error(401, 'Authorization header is required'));
     }
-  const { type, role, level, techstack, amount} =await req.body;
+
     
   if (!type || !role || !level || !techstack || !amount) {
       return res.json(error(400, 'Missing required fields in request body'));
