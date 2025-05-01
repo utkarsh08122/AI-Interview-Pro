@@ -12,13 +12,10 @@ import { Interview } from "@/lib/model/interview.Schema";
 import { jwtDecode } from "jwt-decode";
 
 export async function POST(req: NextRequest) {
-  const { type, role, level, techstack, amount} =await req.json();
+  const { type, role, level, techstack, amount,userid} =await req.json();
   
   try {
-    const cookieStore = cookies();
-    const RefresToken =  cookieStore.get("RefresToken").value || "";
-    const{id,name}=jwtDecode(RefresToken);
-    return NextResponse.json(success(200, {id,name}));
+ 
     
     const genAi = new GoogleGenAI({
       apiKey:process.env.GOOGLE_GENERATIVE_AI_API_KEY,
@@ -48,7 +45,7 @@ export async function POST(req: NextRequest) {
       level,
       techstack: techstack.split(","),
       questions: JSON.parse(questions),
-      userId: id,
+      userId: userid,
       finalized: true,
     };
     console.log("1", interview);
