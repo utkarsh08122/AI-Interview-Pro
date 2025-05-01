@@ -1,33 +1,30 @@
-import { generateText } from "ai";
 import { GoogleGenAI } from "@google/genai";
-import { google } from "@ai-sdk/google";
-import { getRandomInterviewCover } from "@/lib/utils";
 import { NextRequest, NextResponse } from "next/server";
 import { success, error } from "@/helper/responsController";
-import { MyCookiesComponent, getDataFromToken } from "@/helper/Token";
-import { cookies } from "next/headers";
 import { dbConnect } from "@/lib/dbConnect";
-import { User } from "@/lib/model/user.Schema";
 import { Interview } from "@/lib/model/interview.Schema";
 import { jwtDecode } from "jwt-decode";
-export async function POST(req:NextRequest) {
+export async function POST(req: NextRequest) {
   try {
-    
-    const { type, role, level, techstack, amount} =await req.json();
+    const { type, role, level, techstack, amount } = await req.json();
+    const authHeader = req.headers.get("authorization");
 
-  const authHeader = req.headers.get('authorization');
-    if (!authHeader || !authHeader.startsWith('Bearer ')) {
-      return res.json(error(401, 'Authorization header is required'));
+    if (!authHeader || !authHeader.startsWith("Bearer ")) {
+      return NextResponse.json(error(401, "Authorization header is required"));
     }
 
-    
-  if (!type || !role || !level || !techstack || !amount) {
-      return res.json(error(400, 'Missing required fields in request body'));
+    if (!type || !role || !level || !techstack || !amount) {
+      return NextResponse.json(
+        error(400, "Missing required fields in request body")
+      );
     }
-   const token = authHeader.split(' ')[1];
+
+    const token = authHeader.split(" ")[1];
+    const { id }: any = jwtDecode(token);
     const genAi = new GoogleGenAI({
-      apiKey:process.env.GOOGLE_GENERATIVE_AI_API_KEY,
+      apiKey: process.env.GOOGLE_GENERATIVE_AI_API_KEY!,
     });
+    console.log("333", id);
 
     const { text: questions }: any = await genAi.models.generateContent({
       model: "gemini-2.0-flash",
@@ -47,16 +44,15 @@ export async function POST(req:NextRequest) {
     });
     console.log("2", questions);
     const interview = {
-      role : token,
+      role: token,
       type,
       level,
       techstack: techstack.split(","),
       questions: JSON.parse(questions),
-      userId:userid,
+      userId: "",
       finalized: true,
     };
     console.log("1", interview);
- 
 
     dbConnect();
     console.log("thi ai tiwe", interview);
