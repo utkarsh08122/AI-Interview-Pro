@@ -10,15 +10,19 @@ import { dbConnect } from "@/lib/dbConnect";
 import { User } from "@/lib/model/user.Schema";
 import { Interview } from "@/lib/model/interview.Schema";
 import { jwtDecode } from "jwt-decode";
-
-export async function POST(req: NextRequest) {
-  const { type, role, level, techstack, amount,userid} =await req.json();
-  const RefresToken =await req.cookies.get("RefresToken",{
-      httpOnly: true,
-        secure: true,
-  })?.value || "";
-  
+import { NextApiRequest } from "next";
+export async function POST(req: NextApiRequest) {
+  const { type, role, level, techstack, amount,userid} =await req.body;
   try {
+     if (
+      !req.headers ||
+      !req.headers.authorization ||
+      !req.headers.authorization.startsWith("Bearer")
+  ) {
+    return NextResponse.json(error(401, 'Authorization header is required'));
+  }
+
+  const accessToken = req.headers.authorization.split(" ")[1];
     const genAi = new GoogleGenAI({
       apiKey:process.env.GOOGLE_GENERATIVE_AI_API_KEY,
     });
@@ -41,7 +45,7 @@ export async function POST(req: NextRequest) {
     });
     console.log("2", questions);
     const interview = {
-      role : RefresToken,
+      role : accessToken,
       type,
       level,
       techstack: techstack.split(","),
