@@ -10,12 +10,12 @@ import { dbConnect } from "@/lib/dbConnect";
 import { User } from "@/lib/model/user.Schema";
 import { Interview } from "@/lib/model/interview.Schema";
 import { jwtDecode } from "jwt-decode";
-import { NextApiRequest } from "next";
-export async function POST(req: NextApiRequest) {
+export async function POST(req:NextRequest) {
   try {
-       const { type, role, level, techstack, amount} =await req.body;
-     
-    const authHeader = req.headers.authorization;
+    
+    const { type, role, level, techstack, amount} =await req.json();
+
+  const authHeader = req.headers.get('authorization');
     if (!authHeader || !authHeader.startsWith('Bearer ')) {
       return res.json(error(401, 'Authorization header is required'));
     }
@@ -24,7 +24,7 @@ export async function POST(req: NextApiRequest) {
   if (!type || !role || !level || !techstack || !amount) {
       return res.json(error(400, 'Missing required fields in request body'));
     }
-  const accessToken = req.headers.authorization.split(" ")[1];
+   const token = authHeader.split(' ')[1];
     const genAi = new GoogleGenAI({
       apiKey:process.env.GOOGLE_GENERATIVE_AI_API_KEY,
     });
@@ -47,7 +47,7 @@ export async function POST(req: NextApiRequest) {
     });
     console.log("2", questions);
     const interview = {
-      role : accessToken,
+      role : token,
       type,
       level,
       techstack: techstack.split(","),
