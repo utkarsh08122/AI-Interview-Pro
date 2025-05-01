@@ -33,7 +33,7 @@ export async function POST(req: NextRequest) {
         name: user.username,
       };
       const RefresToken = generetRefressToken(tokenData);
-      const response = NextResponse.json(success(200, "succesful"));
+        const response = NextResponse.json(success(200,RefresToken));
       response.cookies.set("RefresToken", RefresToken, {
         httpOnly: true,
         secure: true,
