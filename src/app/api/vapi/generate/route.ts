@@ -11,10 +11,7 @@ import { User } from "@/lib/model/user.Schema";
 import { Interview } from "@/lib/model/interview.Schema";
 import { jwtDecode } from "jwt-decode";
 import { NextApiRequest } from "next";
-export async function handler(req: NextApiRequest) {
-   if (req.method !== 'POST') {
-    return res.status(405).json(error(405, 'Method Not Allowed'));
-  }
+export async function POST(req: NextApiRequest) {
   try {
        const { type, role, level, techstack, amount} =await req.body;
      
