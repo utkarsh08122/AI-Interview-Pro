@@ -3,7 +3,7 @@ import type { NextRequest } from "next/server";
 import * as jose from "jose";
 
 export async function middleware(request: NextRequest) {
-  const RefresToken = request.cookies.get("RefresToken")?.value || "";
+  const RefresToken =await request.cookies.get("RefresToken")?.value || "";
 
   const jwtConfig = {
     secret: new TextEncoder().encode(RefresToken),
