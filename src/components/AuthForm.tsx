@@ -10,6 +10,8 @@ import { toast } from "sonner";
 import FormField from "./FormField";
 import { useRouter } from "next/navigation";
 import { axiosClient } from "@/lib/axiosInstance";
+import { KEY_ACCESS_TOKEN, setItem } from "@/lib/localStorageManager";
+
 
 const authFormSchema = (type: FormType) => {
   return z.object({
@@ -50,6 +52,7 @@ const AuthForm = ({ type }: { type: FormType }) => {
           withCredentials: true,
         });
         if (result.data.status === "ok") {
+setItem(KEY_ACCESS_TOKEN,result.data.RefresToken);
           toast.success("Sign-up successfully");
           router.push("/");
         } else {
