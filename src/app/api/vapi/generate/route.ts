@@ -49,7 +49,7 @@ export async function POST(req: NextRequest) {
       level,
       techstack: techstack.split(","),
       questions: JSON.parse(questions),
-      userId:userid
+      userId:userid,
       finalized: true,
     };
     console.log("1", interview);
