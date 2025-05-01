@@ -36,6 +36,7 @@ const InterviewForm = ({ userId }: any) => {
   // 2. Define a submit handler.
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
+      toast.success(`Wait For a Second Interview Generation Start  `);
       console.log(values);
       const respons = await axiosClient.post("/api/vapi/create", {
         values,
@@ -43,6 +44,7 @@ const InterviewForm = ({ userId }: any) => {
       });
       console.log(respons);
       if (respons.data.result === "successful") {
+        toast.success(` Interview Successfill Generated  `);
         router.push("/");
       }
     } catch (error) {
@@ -62,7 +64,7 @@ const InterviewForm = ({ userId }: any) => {
             onSubmit={form.handleSubmit(onSubmit)}
             className="w-full space-y-5 mt-4 form "
           >
-         <FormField
+            <FormField
               name="role"
               label="role"
               type="text"
@@ -100,8 +102,9 @@ const InterviewForm = ({ userId }: any) => {
               control={form.control}
               placeholder="Are you aiming for a technical or non-technical"
             />
+
             <Button type="submit" className="btn">
-            generate Interview 
+              generate Interview
             </Button>
           </form>
         </Form>
@@ -111,4 +114,3 @@ const InterviewForm = ({ userId }: any) => {
 };
 
 export default InterviewForm;
-
