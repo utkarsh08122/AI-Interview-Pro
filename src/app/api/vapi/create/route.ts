@@ -3,18 +3,10 @@ import { NextRequest, NextResponse } from "next/server";
 import { success, error } from "@/helper/responsController";
 import { dbConnect } from "@/lib/dbConnect";
 import { Interview } from "@/lib/model/interview.Schema";
-import { jwtDecode } from "jwt-decode";
 export async function POST(req: NextRequest) {
   try {
-    const data = await req.json();
-    const [userId, ready, role, type, level, amount, techstack] = await data;
-    console.log("1");
-
-    console.log("2", data);
-
-    console.log("3");
-
-    console.log("5", userId);
+    const { userId, values } = await req.json();
+    const { role, type, level, amount, techstack } = await values;
 
     const genAi = new GoogleGenAI({
       apiKey: "AIzaSyAykniy8AomulgCuF2VRk_gFJaZdIN5iw0",
@@ -62,4 +54,3 @@ export async function POST(req: NextRequest) {
 export async function GET() {
   return NextResponse.json(success(200, "THANK YOU!"));
 }
-
