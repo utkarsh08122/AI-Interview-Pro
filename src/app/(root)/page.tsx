@@ -47,7 +47,6 @@ const page = async () => {
             interview.map((interveiw) => (
               <InterviewCard
                 key={interveiw._id}
-                companyName={interveiw.companyName}
                 role={interveiw.role}
                 interviewId={interveiw._id}
                 userId={interveiw.userId}
@@ -68,7 +67,6 @@ const page = async () => {
             letestInterview.map((interveiw) => (
               <InterviewCard
                 key={interveiw._id}
-                companyName={interveiw.companyName}
                 role={interveiw.role}
                 interviewId={interveiw.id}
                 userId={interveiw.userId}
