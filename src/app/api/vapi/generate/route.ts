@@ -19,7 +19,7 @@ export async function POST(req: NextApiRequest) {
       !req.headers.authorization ||
       !req.headers.authorization.startsWith("Bearer")
   ) {
-    return NextResponse.json(error(401, 'Authorization header is required'));
+    return NextResponse.json(error(401, 'Authorization header is required ${req.headers}'));
   }
 
   const accessToken = req.headers.authorization.split(" ")[1];
