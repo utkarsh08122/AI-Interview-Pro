@@ -44,12 +44,12 @@ export async function POST(req: NextRequest) {
     });
     console.log("2", questions);
     const interview = {
-      role: token,
+      role,
       type,
       level,
       techstack: techstack.split(","),
       questions: JSON.parse(questions),
-      userId: "",
+      userId: id,
       finalized: true,
     };
     console.log("1", interview);
