@@ -1,9 +1,10 @@
 import Agent from "@/components/Agent";
 import { MyCookiesComponent } from "@/helper/Token";
-import { cookies } from "next/headers";
 
 const Page = async () => {
   const { name, id }: any = await MyCookiesComponent();
+  console.log(name, id);
+
 
   return (
     <>
