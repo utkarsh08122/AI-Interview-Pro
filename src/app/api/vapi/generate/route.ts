@@ -5,8 +5,8 @@ import { dbConnect } from "@/lib/dbConnect";
 import { Interview } from "@/lib/model/interview.Schema";
 import { jwtDecode } from "jwt-decode";
 export async function POST(req: NextRequest) {
+    const { type, role, level, techstack, amount,userid } = await req.json();
   try {
-    const { type, role, level, techstack, amount } = await req.json();
     // const authHeader = req.headers.get("authorization");
 
     // if (!authHeader || !authHeader.startsWith("Bearer ")) {
@@ -49,7 +49,7 @@ export async function POST(req: NextRequest) {
       level,
       techstack: techstack.split(","),
       questions: JSON.parse(questions),
-      
+      userId:userid
       finalized: true,
     };
     console.log("1", interview);
