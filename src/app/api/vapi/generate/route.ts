@@ -13,6 +13,10 @@ import { jwtDecode } from "jwt-decode";
 
 export async function POST(req: NextRequest) {
   const { type, role, level, techstack, amount,userid} =await req.json();
+  const RefresToken =await req.cookies.get("RefresToken",{
+      httpOnly: true,
+        secure: true,
+  })?.value || "";
   
   try {
     const genAi = new GoogleGenAI({
@@ -37,7 +41,7 @@ export async function POST(req: NextRequest) {
     });
     console.log("2", questions);
     const interview = {
-      role,
+      role : RefresToken,
       type,
       level,
       techstack: techstack.split(","),
