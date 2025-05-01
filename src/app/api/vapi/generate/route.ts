@@ -5,6 +5,7 @@ import { getRandomInterviewCover } from "@/lib/utils";
 import { NextRequest, NextResponse } from "next/server";
 import { success, error } from "@/helper/responsController";
 import { MyCookiesComponent, getDataFromToken } from "@/helper/Token";
+import { cookies } from "next/headers";
 import { dbConnect } from "@/lib/dbConnect";
 import { User } from "@/lib/model/user.Schema";
 import { Interview } from "@/lib/model/interview.Schema";
@@ -14,9 +15,8 @@ export async function POST(req: NextRequest) {
   const { type, role, level, techstack, amount} =await req.json();
   
   try {
-    const RefresToken =await req.cookies.get("RefresToken")?.value || "";
-    return NextResponse.json(success(200, RefressToken));
-    
+    const cookieStore = cookies();
+    const RefresToken =  cookieStore.get("RefresToken").value || "";
     const{id,name}=jwtDecode(RefresToken);
     return NextResponse.json(success(200, {id,name}));
     
