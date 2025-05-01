@@ -11,17 +11,21 @@ import { User } from "@/lib/model/user.Schema";
 import { Interview } from "@/lib/model/interview.Schema";
 import { jwtDecode } from "jwt-decode";
 import { NextApiRequest } from "next";
-export async function POST(req: NextApiRequest) {
-  const { type, role, level, techstack, amount,userid} =await req.body;
+export async function handler(req: NextApiRequest) {
+   if (req.method !== 'POST') {
+    return res.status(405).json(error(405, 'Method Not Allowed'));
+  }
   try {
      if (
-      !req.headers ||
-      !req.headers.authorization ||
-      !req.headers.authorization.startsWith("Bearer")
-  ) {
-    return NextResponse.json(error(401, `Authorization header is required ${req.headers}`));
-  }
-
+    const authHeader = req.headers.authorization;
+    if (!authHeader || !authHeader.startsWith('Bearer ')) {
+      return res.json(error(401, 'Authorization header is required'));
+    }
+  const { type, role, level, techstack, amount} =await req.body;
+    
+  if (!type || !role || !level || !techstack || !amount) {
+      return res.json(error(400, 'Missing required fields in request body'));
+    }
   const accessToken = req.headers.authorization.split(" ")[1];
     const genAi = new GoogleGenAI({
       apiKey:process.env.GOOGLE_GENERATIVE_AI_API_KEY,
