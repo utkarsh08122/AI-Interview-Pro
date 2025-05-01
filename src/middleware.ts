@@ -4,11 +4,9 @@ import * as jose from "jose";
 
 export async function middleware(request: NextRequest) {
   const RefresToken = request.cookies.get("RefresToken")?.value || "";
-  const token =
-    "43f26d206d90d10354e42c69dbb7bf17be3a0b7de0acec6fcc81cad0dc70a4c5f360cebfa5e5aecaa6ef01bb8ad3e3ff61729814d39f3760e16f79a27cf4a3f1";
 
   const jwtConfig = {
-    secret: new TextEncoder().encode(token),
+    secret: new TextEncoder().encode(RefresToken),
   };
 
   const path = request.nextUrl.pathname;
