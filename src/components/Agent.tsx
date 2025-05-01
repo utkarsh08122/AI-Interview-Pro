@@ -7,6 +7,7 @@ import { cn } from "@/lib/utils";
 import { vapi } from "@/lib/vapi.sdk";
 import { interviewer } from "@/constants";
 import { createFeedback } from "@/lib/action/general.action";
+import { axiosClient } from "@/lib/axiosInstance";
 
 enum CallStatus {
   INACTIVE = "INACTIVE",
@@ -33,7 +34,11 @@ const Agent = ({
   const [messages, setMessages] = useState<SavedMessage[]>([]);
   const [isSpeaking, setIsSpeaking] = useState(false);
   const [lastMessage, setLastMessage] = useState<string>("");
-  const [lestestMassage, setLestestMassage] = useState<any>();
+  const [lestestMassage, setLestestMassage] = useState<any>([]);
+
+  useEffect(() => {
+    setLestestMassage((prev: any) => [...prev, userId]);
+  }, [userId]);
 
   useEffect(() => {
     const onCallStart = () => {
@@ -45,12 +50,15 @@ const Agent = ({
     };
 
     const onMessage = (message: Message) => {
-      setLestestMassage(message);
-      if (lestestMassage.type == "conversation-update") {
-        console.log(lestestMassage.conversation)
-      }
       if (message.type === "transcript" && message.transcriptType === "final") {
-        const newMessage = { role: message.role, content: message.transcript };
+        const newMessage = {
+          role: message.role,
+          content: message.transcript,
+        };
+        if (newMessage.role === "user") {
+          setLestestMassage((prev: any) => [...prev, newMessage.content]);
+        }
+        console.log(newMessage.role);
         setMessages((prev) => [...prev, newMessage]);
       }
     };
@@ -88,7 +96,21 @@ const Agent = ({
 
   useEffect(() => {
     if (messages.length > 0) {
+      console.log(lestestMassage);
       setLastMessage(messages[messages.length - 1].content);
+    }
+    console.log(callStatus);
+
+    if (callStatus === "FINISHED") {
+      async function call() {
+        if (type === "generate") {
+          const respons = await axiosClient.post(
+            "/api/vapi/create",
+            lestestMassage
+          );
+        }
+        call();
+      }
     }
 
     const handleGenerateFeedback = async (messages: SavedMessage[]) => {
