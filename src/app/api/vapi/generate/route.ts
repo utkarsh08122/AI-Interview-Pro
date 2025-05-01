@@ -17,7 +17,7 @@ export async function handler(req: NextApiRequest) {
   }
   try {
        const { type, role, level, techstack, amount} =await req.body;
-     if (
+     
     const authHeader = req.headers.authorization;
     if (!authHeader || !authHeader.startsWith('Bearer ')) {
       return res.json(error(401, 'Authorization header is required'));
