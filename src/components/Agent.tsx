@@ -44,6 +44,7 @@ const Agent = ({
     };
 
     const onMessage = (message: Message) => {
+      console.log("this si the massage in compo/agent",message)
       if (message.type === "transcript" && message.transcriptType === "final") {
         const newMessage = { role: message.role, content: message.transcript };
         setMessages((prev) => [...prev, newMessage]);
