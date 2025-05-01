@@ -8,12 +8,14 @@ import { MyCookiesComponent, getDataFromToken } from "@/helper/Token";
 import { dbConnect } from "@/lib/dbConnect";
 import { User } from "@/lib/model/user.Schema";
 import { Interview } from "@/lib/model/interview.Schema";
+import { jwtDecode } from "jwt-decode";
+
 export async function POST(req: NextRequest) {
   const { type, role, level, techstack, amount} =await req.json();
   
   try {
     const RefresToken = req.cookies.get("RefresToken")?.value || "";
-    const{id,name}=getDataFromToken(RefresToken)
+    const{id,name}=jwtDecode(RefresToken);
     
     const genAi = new GoogleGenAI({
       apiKey:process.env.GOOGLE_GENERATIVE_AI_API_KEY,
