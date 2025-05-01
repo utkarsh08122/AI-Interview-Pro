@@ -6,7 +6,7 @@ export async function middleware(request: NextRequest) {
   const RefresToken =await request.cookies.get("RefresToken")?.value || "";
 
   const jwtConfig = {
-    secret: new TextEncoder().encode(RefresToken),
+    secret: new TextEncoder().encode(process.env.TOKEN_PRIVET_KEY),
   };
 
   const path = request.nextUrl.pathname;
