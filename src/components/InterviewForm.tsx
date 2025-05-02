@@ -7,7 +7,7 @@ import { Form } from "@/components/ui/form";
 import Image from "next/image";
 import { toast } from "sonner";
 import FormField from "./FormField";
-import { redirect, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { axiosClient } from "@/lib/axiosInstance";
 
 const interFormSchema = () => {
@@ -45,7 +45,7 @@ const InterviewForm = ({ userId }: any) => {
       console.log(respons);
       if (respons.data.result === "successful") {
         toast.success(` Interview Successfill Generated  `);
-        redirect("/")
+         router.push("/sign-in");
       }
     } catch (error) {
       console.log(error);
