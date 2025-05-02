@@ -1,25 +1,21 @@
-"use client";
-import React from "react";
-import { Button } from "@/components/ui/button";
-import { axiosClient } from "@/lib/axiosInstance";
-import { redirect } from "next/navigation";
-import { toast } from "sonner";
+import Logout from "@/components/Logout";
+import Image from "next/image";
+import Link from "next/link";
+import { ReactNode } from "react";
 
-const Logout = () => {
-  async function logout() {
-    const { data } = await axiosClient.delete("/api/logout");
-    if (data.result === "success") {
-      redirect("/sign-in");
-    } else {
-      toast("Somethin is wrong");
-    }
-  }
-
+const rootLayout = ({ children }: { children: ReactNode }) => {
   return (
-    <Button onClick={logout} className="bg-red-400 hover:bg-red-600 text-white">
-      Logout
-    </Button>
+    <div className="root-layout">
+      <nav className="flex justify-between">
+        <Link href="/" className="flex items-center gap-2">
+          <Image src="/logo.svg" alt="logo" width={38} height={32} />
+          <h2 className="text-primary">AIInterviewPro</h2>
+        </Link>
+       <Logout/>
+      </nav>
+      {children}
+    </div>
   );
 };
 
-export default Logout;
+export default rootLayout;
