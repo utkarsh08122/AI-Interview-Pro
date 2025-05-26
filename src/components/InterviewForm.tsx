@@ -45,7 +45,7 @@ const InterviewForm = ({ userId }: any) => {
       console.log(respons);
       if (respons.data.result === "successful") {
         toast.success(` Interview Successfill Generated  `);
-         router.push("/sign-in");
+         router.push("/");
       }
     } catch (error) {
       console.log(error);
