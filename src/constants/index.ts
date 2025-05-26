@@ -197,7 +197,7 @@ export const mappings = {
   "postgresql": ["postgresql"],
   "prisma": ["prisma"],
   "python": ["python"],
-  "react": ["react", "react.js", "reactjs"],
+  "react.js": ["react", "react.js", "reactjs"],
   "redis": ["redis"],
   "redux": ["redux"],
   "rollup": ["rollup", "rollup.js", "rollupjs"],
