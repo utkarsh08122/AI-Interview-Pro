@@ -20,7 +20,7 @@ Built with the latest technologies and deployed on Vercel, Ai-Interview-Pro ensu
 ## 🌐 Live Application
 
 Access the live platform here:  
-🔗 [Ai-Interview-Pro - Live Demo](https://chatgpt.com/c/680efbd6-6ccc-8001-bbff-1bd1845988aa)
+🔗 [Ai-Interview-Pro - Live Demo](https://ai-interview-pro.vercel.app/)
 
 ---
 
