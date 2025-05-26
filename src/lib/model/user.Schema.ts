@@ -5,7 +5,6 @@ const userSchema = new mongoose.Schema(
     username: {
       type: String,
       required: true,
-      unique: true,
     },
     email: {
       type: String,
@@ -31,8 +30,7 @@ const userSchema = new mongoose.Schema(
     },
     varifytoken: String,
     varifyTokenExpiryy: Date,
-    interview: [{ type: mongoose.Types.ObjectId, ref: "users" }],
-    following: [{ type: mongoose.Types.ObjectId, ref: "users" }],
+    interview: [{ type: mongoose.Types.ObjectId, ref: "interviews" }],
   },
   { timestamps: true }
 );
