@@ -41,6 +41,9 @@ export const getFeedbackByInterviewId = async (
 ): Promise<Feedback | null> => {
   const { interviewId, userId } = params;
 
+if(!interviewId && !userId){
+return null;
+}
   const feedback = await Feedbacks.find({
     interviewId: interviewId,
     userId: userId,
